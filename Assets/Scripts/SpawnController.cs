@@ -17,9 +17,9 @@ public class SpawnController : MonoBehaviour
         while (true)
         {
             var enemyIndex = Random.Range(0,1);
-            var enemy = Instantiate(_enemies[enemyIndex], transform.position, Quaternion.Euler(0f,-180,0f));
+            var enemy = Instantiate(_enemies[enemyIndex], transform.position, Quaternion.identity);
             enemy.Init();
-            yield return new WaitForSeconds(8f);
+            yield return new WaitForSeconds(4f);
         }
     }
 }

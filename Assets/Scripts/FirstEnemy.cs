@@ -1,71 +1,38 @@
-using System;
-using System.Collections;
 using UnityEngine;
 
 public class FirstEnemy : BaseEnemy
 {
-    private bool isCollision;
-    public Vector3 angleVelocity;
-    private int side = 1;
-
-    private void Start()
-    {
-        StartCoroutine(SwitchSide());
-    }
-
-    IEnumerator SwitchSide()
-    {
-        while (true)
-        {
-            side *= -1;
-            yield return new WaitForSeconds(8f);
-        }
-    }
+    private Vector3 direction;
+    private bool isGround => transform.position.y < 3.2f;
 
     public override void Init()
     {
         var centerOfMass = _rigidbody.centerOfMass;
         centerOfMass = new Vector3(centerOfMass.x, centerOfMass.y - .2f, centerOfMass.z);
         _rigidbody.centerOfMass = centerOfMass;
-        
-        angleVelocity = new Vector3(0, 70, 0);
+        direction = Vector3.back;
     }
+    
     
     private void FixedUpdate()
     {
-        if (transform.position.y < 3.2f)
+        if (isGround)
         {
-            CalculateMovement();
-            CalculateRotation();
+            MoveForward();
         }
     }
     
-    private void CalculateMovement(){
-        
-        if(!isCollision)
-            _rigidbody.MovePosition(transform.position + transform.forward * (Time.fixedDeltaTime * Speed));
-    }
-
-    private void CalculateRotation()
+    private void MoveForward()
     {
-        if (isCollision)
-        {
-            Quaternion deltaRotation = Quaternion.Euler(angleVelocity * ((side) * Time.fixedDeltaTime));
-            _rigidbody.MoveRotation(_rigidbody.rotation * deltaRotation);
-        }
-       
+        _rigidbody.MovePosition(transform.position + direction * (Time.fixedDeltaTime * Speed));
     }
-
-    private void OnCollisionStay(Collision collision)
+    
+    private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.layer == 6)
             return;
 
-        isCollision = true;
+        direction = new Vector3(Random.Range(-1f,1f),0f,Random.Range(-1f,1f));
     }
-
-    private void OnCollisionExit(Collision other)
-    {
-        isCollision = false;
-    }
+   
 }
