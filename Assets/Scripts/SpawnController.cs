@@ -19,7 +19,7 @@ public class SpawnController : MonoBehaviour
             var enemyIndex = Random.Range(0,1);
             var enemy = Instantiate(_enemies[enemyIndex], transform.position, Quaternion.Euler(0f,-180,0f));
             enemy.Init();
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(8f);
         }
     }
 }
