@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 public class SecondEnemy : BaseEnemy
 {
+    [SerializeField] private ParticleSystem _particle;
     private bool isJump;
     private Vector3 _direction = new Vector3(0f,9f,-3);
 
@@ -16,6 +17,7 @@ public class SecondEnemy : BaseEnemy
 
     private void FixedUpdate()
     {
+        
         if (transform.position.y < 7f)
         {
             if (!isJump)
@@ -33,6 +35,9 @@ public class SecondEnemy : BaseEnemy
             return;
 
         _rigidbody.rotation = Quaternion.RotateTowards(transform.rotation,Quaternion.identity,80f * Time.deltaTime);
+        
+        
+        
 
     }
     
