@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class FirstEnemy : BaseEnemy
 {
@@ -29,6 +31,13 @@ public class FirstEnemy : BaseEnemy
     
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision.gameObject.layer);
+        if (collision.gameObject.layer == 7)
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+        
         if(collision.gameObject.layer == 6)
             return;
 

@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
+    [SerializeField] private WeaponController _weapon;
     
     [SerializeField] private float _viewClampYMin = -70f;
     [SerializeField] private float _viewClampYMax = 80f;
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
 
     private void FireOnperformed(InputAction.CallbackContext obj)
     {
+        _weapon.Fire();
     }
 
     private void Update()

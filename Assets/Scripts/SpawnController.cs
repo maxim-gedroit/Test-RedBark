@@ -16,10 +16,10 @@ public class SpawnController : MonoBehaviour
     {
         while (true)
         {
-            var enemyIndex = Random.Range(0,1);
+            var enemyIndex = Random.Range(0,2);
             var enemy = Instantiate(_enemies[enemyIndex], transform.position, Quaternion.identity);
             enemy.Init();
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(1f);
         }
     }
 }
