@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float Radius = 20f;
-    public float Force = 20f;
+    [SerializeField] private ParticleSystem ExplosionEffect;
+    private float Radius = 50f;
+    private float Force = 500f;
     void Start()
     {
         Invoke("DeleteSelf",3f);
@@ -17,7 +18,8 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Explode();
+        Debug.Log("explde");
+        Explode();
     }
 
     public void Explode()
@@ -31,8 +33,8 @@ public class Bullet : MonoBehaviour
                 rigidbody.AddExplosionForce(Force,transform.position,Radius);
             }
         }
+        
+        Instantiate(ExplosionEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
-        // Instantiate(ExplosionEffect, transform.position, Quaternion.identity);
     }
-
 }

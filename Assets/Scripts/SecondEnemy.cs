@@ -48,11 +48,6 @@ public class SecondEnemy : BaseEnemy
     
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == 7)
-        {
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
-        }
         _direction = new Vector3(Random.Range(-6f,6f),9f,Random.Range(-3f,3f));
     }
 }
