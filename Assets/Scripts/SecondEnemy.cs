@@ -7,12 +7,19 @@ using Random = UnityEngine.Random;
 public class SecondEnemy : BaseEnemy
 {
     [SerializeField] private ParticleSystem _particle;
+    private Renderer _renderer;
     private bool isJump;
-    private Vector3 _direction = new Vector3(0f,9f,-3);
+    public Vector3 _direction;
 
-    public override void Init()
+    private void Start()
     {
-        base.Init();
+        _renderer = GetComponent<Renderer>();
+    }
+
+    public override void Init(Transform _transform)
+    {
+        base.Init(_transform);
+        Hp = 3;
     }
 
     private void FixedUpdate()
@@ -40,7 +47,18 @@ public class SecondEnemy : BaseEnemy
         
 
     }
-    
+
+    public override void Damage()
+    {
+        base.Damage(); 
+        _hpBar.Damage();
+        Hp--;
+        if (Hp == 0)
+        {
+            transform.DOScale(Vector3.zero, 1).OnComplete(()=>{Destroy(gameObject);});
+        }
+    }
+
     private void Jump()
     {
         _rigidbody.velocity = _direction;
@@ -48,6 +66,6 @@ public class SecondEnemy : BaseEnemy
     
     private void OnCollisionEnter(Collision collision)
     {
-        _direction = new Vector3(Random.Range(-6f,6f),9f,Random.Range(-3f,3f));
+        _direction = new Vector3(Random.Range(-6f,6f),Speed,Random.Range(-3f,3f));
     }
 }

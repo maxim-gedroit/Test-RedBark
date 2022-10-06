@@ -4,7 +4,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private ParticleSystem ExplosionEffect;
-    private float Radius = 50f;
+    private float Radius = 15f;
     private float Force = 500f;
     void Start()
     {
@@ -18,7 +18,6 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("explde");
         Explode();
     }
 
@@ -31,6 +30,11 @@ public class Bullet : MonoBehaviour
             if (rigidbody)
             {
                 rigidbody.AddExplosionForce(Force,transform.position,Radius);
+                var root = overlappedColliders[i].GetComponent<Root>();
+                if (root != null)
+                {
+                    root.Action();
+                }
             }
         }
         

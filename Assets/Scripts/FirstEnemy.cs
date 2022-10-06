@@ -1,14 +1,15 @@
-using System;
+using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class FirstEnemy : BaseEnemy
 {
     private Vector3 direction;
-    private bool isGround => transform.position.y < 3.2f;
 
-    public override void Init()
+    public override void Init(Transform _transform)
     {
+        base.Init(_transform);
+        Hp = 3;
         var centerOfMass = _rigidbody.centerOfMass;
         centerOfMass = new Vector3(centerOfMass.x, centerOfMass.y - .2f, centerOfMass.z);
         _rigidbody.centerOfMass = centerOfMass;
@@ -18,10 +19,7 @@ public class FirstEnemy : BaseEnemy
     
     private void FixedUpdate()
     {
-        if (isGround)
-        {
-            MoveForward();
-        }
+        MoveForward();
     }
     
     private void MoveForward()
@@ -31,10 +29,23 @@ public class FirstEnemy : BaseEnemy
     
     private void OnCollisionEnter(Collision collision)
     {
+        
         if(collision.gameObject.layer == 6)
             return;
 
         direction = new Vector3(Random.Range(-1f,1f),0f,Random.Range(-1f,1f));
     }
-   
+
+    public override void Damage()
+    {
+        base.Damage();
+        _hpBar.Damage();
+        transform.DOScale(transform.localScale / 1.8f, 1);
+        Hp--;
+        if (Hp == 0)
+        {
+            transform.DOScale(Vector3.zero, 1).OnComplete(()=>{Destroy(gameObject);});
+            
+        }
+    }
 }

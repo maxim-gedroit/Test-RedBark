@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 
 public class SpawnController : MonoBehaviour
 {
+    [SerializeField] private Transform _target;
     [SerializeField] private BaseEnemy[] _enemies;
 
     private void Start()
@@ -18,7 +19,7 @@ public class SpawnController : MonoBehaviour
         {
             var enemyIndex = Random.Range(0,2);
             var enemy = Instantiate(_enemies[enemyIndex], transform.position, Quaternion.identity);
-            enemy.Init();
+            enemy.Init(_target);
             yield return new WaitForSeconds(1f);
         }
     }
