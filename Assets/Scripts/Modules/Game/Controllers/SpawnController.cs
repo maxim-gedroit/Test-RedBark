@@ -32,7 +32,6 @@ public class SpawnController : MonoBehaviour
     {
         while (count != 0)
         {
-            Debug.Log("spawn");
             var enemyIndex = Random.Range(0,2);
             var enemy = Instantiate(_enemies[enemyIndex], transform.position, Quaternion.identity);
             enemy.Init(_target);

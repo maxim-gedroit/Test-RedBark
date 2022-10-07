@@ -1,4 +1,6 @@
 using System;
+using Cysharp.Threading.Tasks;
+using Modules.SceneManager;
 using TMPro;
 using UnityEngine;
 
@@ -7,6 +9,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private TMP_Text _enemyLabel;
     [SerializeField] private TMP_Text _timeLabel;
     [SerializeField] private SpawnController _spawnController;
+
+    private bool isLevelEnd;
     
     private int EnemyCount = 200;
     private float time = 120f;
@@ -35,6 +39,15 @@ public class GameController : MonoBehaviour
             time -= Time.deltaTime;
             _timeLabel.text = "time: " + Mathf.Round(time).ToString();
         }
-       
+        else
+        {
+            if (!isLevelEnd)
+            {
+                isLevelEnd = true;
+                SceneSwitcher.Load("Splash").Forget();
+            }
+
+        }
+
     }
 }
