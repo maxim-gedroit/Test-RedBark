@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class BaseEnemy : MonoBehaviour
 {
+    public static event Action<BaseEnemy> _destroy;
     public HpBar _hpBar;
     public int Hp;
     public float Speed;
@@ -21,5 +23,11 @@ public class BaseEnemy : MonoBehaviour
     public virtual void Damage()
     {
         
+    }
+
+    public virtual void Dead()
+    {
+        _destroy?.Invoke(this);
+        Destroy(gameObject);
     }
 }

@@ -55,7 +55,7 @@ public class SecondEnemy : BaseEnemy
         Hp--;
         if (Hp == 0)
         {
-            transform.DOScale(Vector3.zero, 1).OnComplete(()=>{Destroy(gameObject);});
+            transform.DOScale(Vector3.zero, 1).OnComplete(()=>{Dead();});
         }
     }
 

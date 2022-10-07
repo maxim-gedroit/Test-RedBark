@@ -1,10 +1,18 @@
+using System;
 using UnityEngine;
 
 public class Edge : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name + "delete");
-        Destroy(collision.gameObject);
+        try
+        {
+            var enemy = collision.gameObject.GetComponent<BaseEnemy>();
+            enemy.Dead();
+        }
+        catch 
+        {
+        }
+       
     }
 }
