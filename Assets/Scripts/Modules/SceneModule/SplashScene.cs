@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace Modules.SceneManager
 {
@@ -20,7 +19,7 @@ namespace Modules.SceneManager
         public override async UniTask<bool> Opened()
         {
             var res = new UniTaskCompletionSource<bool>();
-            await UniTask.Delay(2);
+            await UniTask.Delay(2000);
             await SceneSwitcher.Load("Game");
             return await res.Task;
         }

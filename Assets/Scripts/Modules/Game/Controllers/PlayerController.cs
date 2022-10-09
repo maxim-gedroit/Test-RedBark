@@ -53,4 +53,9 @@ public class PlayerController : MonoBehaviour
         _cameraRotation.x = Mathf.Clamp(_cameraRotation.x, _viewClampYMin, _viewClampYMax);
         _camera.transform.localRotation = Quaternion.Euler(_cameraRotation);
     }
+
+    private void OnDestroy()
+    {
+        _playerInput.Player.Fire.performed -= FireOnperformed;
+    }
 }

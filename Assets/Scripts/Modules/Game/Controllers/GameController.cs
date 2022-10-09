@@ -1,6 +1,3 @@
-using System;
-using Cysharp.Threading.Tasks;
-using Modules.SceneManager;
 using TMPro;
 using UnityEngine;
 
@@ -44,10 +41,8 @@ public class GameController : MonoBehaviour
             if (!isLevelEnd)
             {
                 isLevelEnd = true;
-                SceneSwitcher.Load("Splash").Forget();
+                PopupManager.Instance.Show("complete");
             }
-
         }
-
     }
 }
