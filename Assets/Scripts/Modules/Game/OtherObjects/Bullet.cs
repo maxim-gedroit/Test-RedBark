@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -30,15 +29,13 @@ public class Bullet : MonoBehaviour
             if (rigidbody)
             {
                 rigidbody.AddExplosionForce(Force,transform.position,Radius);
-                var root = overlappedColliders[i].GetComponent<Root>();
+                var root = overlappedColliders[i].GetComponent<ITarget>();
                 if (root != null)
-                {
-                    root.Action();
-                }
+                    root.Damage();
             }
         }
         
         Instantiate(ExplosionEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        DeleteSelf();
     }
 }

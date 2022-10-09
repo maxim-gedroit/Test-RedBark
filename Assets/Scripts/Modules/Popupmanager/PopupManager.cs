@@ -33,9 +33,6 @@ public class PopupManager : MonoBehaviour
     
     public void Show(string id)
     {
-        if (id == _activePopup)
-            return;
-        
         CloseAll();
         
         foreach (var item in _popups)

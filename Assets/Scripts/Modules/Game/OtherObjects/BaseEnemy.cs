@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class BaseEnemy : MonoBehaviour
+public class BaseEnemy : MonoBehaviour, ITarget
 {
     public static event Action<BaseEnemy> _destroy;
     public HpBar _hpBar;

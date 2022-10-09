@@ -14,13 +14,14 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        _spawnController.destroyenemy += UpdateCounter;
+        _spawnController.OnDestroyEnemy += UpdateCounter;
         _enemyLabel.text = EnemyCount.ToString();
     }
 
     private void Start()
     {
         _enemyLabel.text = "enemy: " + EnemyCount.ToString();
+        _spawnController.Init(EnemyCount);
     }
 
     private void UpdateCounter()
@@ -30,6 +31,11 @@ public class GameController : MonoBehaviour
     }
 
     private void Update()
+    {
+        CalculateGameTimer();
+    }
+
+    private void CalculateGameTimer()
     {
         if (time > 0)
         {
@@ -41,8 +47,21 @@ public class GameController : MonoBehaviour
             if (!isLevelEnd)
             {
                 isLevelEnd = true;
-                PopupManager.Instance.Show("complete");
+                if (EnemyCount == 0)
+                    CompleteGame();
+                else
+                    LoseGame();
             }
         }
+    }
+
+    private void LoseGame()
+    {
+        PopupManager.Instance.Show("lose");
+    }
+    
+    private void CompleteGame()
+    {
+        PopupManager.Instance.Show("complete");
     }
 }

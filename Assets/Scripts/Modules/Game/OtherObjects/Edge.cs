@@ -7,7 +7,7 @@ public class Edge : MonoBehaviour
     {
         try
         {
-            var enemy = collision.gameObject.GetComponent<BaseEnemy>();
+            var enemy = collision.gameObject.GetComponent<ITarget>();
             enemy.Dead();
         }
         catch 

@@ -1,41 +1,41 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class SpawnController : MonoBehaviour
 {
-    public event Action destroyenemy;
+    public event Action OnDestroyEnemy;
     [SerializeField] private Transform _target;
     [SerializeField] private BaseEnemy[] _enemies;
-    private int count = 200;
     private Coroutine _coroutine;
+    private int _count;
     private void Awake()
     {
         BaseEnemy._destroy += (baseEnemy) =>
         {
-            destroyenemy?.Invoke();
-            if (count == 0)
+            OnDestroyEnemy?.Invoke();
+            if (_count == 0)
             {
                 StopCoroutine(_coroutine);
             }
         };
     }
 
-    private void Start()
+    public void Init(int _enemyCount)
     {
-       _coroutine = StartCoroutine("Spawner");
+        _count = _enemyCount;
+        _coroutine = StartCoroutine("Spawner");
     }
-
+    
     private IEnumerator Spawner()
     {
-        while (count != 0)
+        while (_count != 0)
         {
             var enemyIndex = Random.Range(0,2);
             var enemy = Instantiate(_enemies[enemyIndex], transform.position, Quaternion.identity);
             enemy.Init(_target);
-            count--;
+            _count--;
             yield return new WaitForSeconds(.5f);
         }
     }
