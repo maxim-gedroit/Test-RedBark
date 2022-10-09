@@ -1,33 +1,30 @@
+using System;
 using TMPro;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _enemyLabel;
-    [SerializeField] private TMP_Text _timeLabel;
+    [SerializeField] private GameView _view;
     [SerializeField] private SpawnController _spawnController;
 
-    private bool isLevelEnd;
-    
-    private int EnemyCount = 200;
-    private float time = 120f;
+    private GameData _data;
 
     private void Awake()
     {
+        _data = new GameData();
         _spawnController.OnDestroyEnemy += UpdateCounter;
-        _enemyLabel.text = EnemyCount.ToString();
     }
 
     private void Start()
     {
-        _enemyLabel.text = "enemy: " + EnemyCount.ToString();
-        _spawnController.Init(EnemyCount);
+        _view.SetEnemyCount(_data.EnemyCount);
+        _spawnController.Init(_data.EnemyCount);
     }
 
     private void UpdateCounter()
     {
-        EnemyCount--;
-        _enemyLabel.text = "enemy: " + EnemyCount.ToString();
+        _data.EnemyCount--;
+        _view.SetEnemyCount(_data.EnemyCount);
     }
 
     private void Update()
@@ -37,25 +34,25 @@ public class GameController : MonoBehaviour
 
     private void CalculateGameTimer()
     {
-        if (time > 0)
+        if (_data.time > 0)
         {
-            time -= Time.deltaTime;
-            _timeLabel.text = "time: " + Mathf.Round(time).ToString();
+            _data.time -= Time.deltaTime;
+            _view.SetTimer(_data.time);
         }
         else
         {
-            if (!isLevelEnd)
+            if (!_data.isLevelEnd)
             {
-                isLevelEnd = true;
-                if (EnemyCount == 0)
+                _data.isLevelEnd = true;
+                if (_data.EnemyCount == 0)
                     CompleteGame();
                 else
-                    LoseGame();
+                    LooseGame();
             }
         }
     }
 
-    private void LoseGame()
+    private void LooseGame()
     {
         PopupManager.Instance.Show("lose");
     }
@@ -63,5 +60,10 @@ public class GameController : MonoBehaviour
     private void CompleteGame()
     {
         PopupManager.Instance.Show("complete");
+    }
+
+    private void OnDestroy()
+    {
+        _spawnController.OnDestroyEnemy -= UpdateCounter;
     }
 }

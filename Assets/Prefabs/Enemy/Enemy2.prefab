@@ -14752,7 +14752,6 @@ GameObject:
   - component: {fileID: 7479449105934840526}
   - component: {fileID: 7585406179949406327}
   - component: {fileID: 2732209744806500482}
-  - component: {fileID: 2532610164162828202}
   m_Layer: 0
   m_Name: Enemy2
   m_TagString: Untagged
@@ -14874,19 +14873,6 @@ MonoBehaviour:
   Speed: 9
   _particle: {fileID: 5511632362116307990}
   _direction: {x: 0, y: 9, z: -3}
---- !u!114 &2532610164162828202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7479449105934840521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecf9f0c96bd104e4a9472bca43f13da6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _anemy: {fileID: 2732209744806500482}
 --- !u!1001 &1133479597448474401
 PrefabInstance:
   m_ObjectHideFlags: 0

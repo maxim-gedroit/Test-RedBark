@@ -1,6 +1,8 @@
+using System.Linq;
+using Cysharp.Threading.Tasks;
+using Modules.SceneManager;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoseLevelPopup : BasePopup
@@ -10,13 +12,14 @@ public class LoseLevelPopup : BasePopup
     public override void OnShow()
     {
         base.OnShow();
-        _label.text = "You Lose";
+        _label.text = "You Loose";
         _restart.onClick.AddListener(RestartLevel);
     }
 
     private void RestartLevel()
     {
-        SceneManager.LoadScene("Game");
+        PopupManager.Instance.CloseAll();
+        SceneSwitcher.Load("Splash").Forget();
     }
 
     public override void OnHide()

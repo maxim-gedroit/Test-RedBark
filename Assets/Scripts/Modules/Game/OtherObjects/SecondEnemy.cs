@@ -19,7 +19,6 @@ public class SecondEnemy : BaseEnemy
     public override void Init(Transform _transform)
     {
         base.Init(_transform);
-        Hp = 3;
     }
 
     private void FixedUpdate()

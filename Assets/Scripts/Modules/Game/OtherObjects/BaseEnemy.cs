@@ -4,9 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class BaseEnemy : MonoBehaviour, ITarget
 {
-    public static event Action<BaseEnemy> _destroy;
+    public static event Action OnDestroy;
     public HpBar _hpBar;
-    public int Hp;
+    public int Hp = 3;
     public float Speed;
     protected Rigidbody _rigidbody;
 
@@ -27,7 +27,7 @@ public class BaseEnemy : MonoBehaviour, ITarget
 
     public virtual void Dead()
     {
-        _destroy?.Invoke(this);
+        OnDestroy?.Invoke();
         Destroy(gameObject);
     }
 }

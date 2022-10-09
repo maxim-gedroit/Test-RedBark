@@ -12,15 +12,18 @@ public class SpawnController : MonoBehaviour
     private int _count;
     private void Awake()
     {
-        BaseEnemy._destroy += (baseEnemy) =>
-        {
-            OnDestroyEnemy?.Invoke();
-            if (_count == 0)
-            {
-                StopCoroutine(_coroutine);
-            }
-        };
+        BaseEnemy.OnDestroy += DestroyEnemy;
     }
+
+    private void DestroyEnemy()
+    {
+        OnDestroyEnemy?.Invoke();
+        if (_count == 0)
+        {
+            StopCoroutine(_coroutine);
+        }
+    }
+    
 
     public void Init(int _enemyCount)
     {
@@ -38,5 +41,10 @@ public class SpawnController : MonoBehaviour
             _count--;
             yield return new WaitForSeconds(.5f);
         }
+    }
+
+    private void OnDestroy()
+    {
+        BaseEnemy.OnDestroy -= DestroyEnemy;
     }
 }

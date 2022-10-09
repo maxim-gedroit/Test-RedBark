@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using Modules.SceneManager;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CompleteLevelPopup : BasePopup
@@ -18,7 +17,8 @@ public class CompleteLevelPopup : BasePopup
 
     private void RestartLevel()
     {
-        SceneManager.LoadScene("Game");
+        PopupManager.Instance.CloseAll();
+        SceneSwitcher.Load("Splash").Forget();
     }
 
     public override void OnHide()

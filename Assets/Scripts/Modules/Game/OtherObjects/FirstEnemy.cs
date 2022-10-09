@@ -9,7 +9,6 @@ public class FirstEnemy : BaseEnemy
     public override void Init(Transform _transform)
     {
         base.Init(_transform);
-        Hp = 3;
         var centerOfMass = _rigidbody.centerOfMass;
         centerOfMass = new Vector3(centerOfMass.x, centerOfMass.y - .2f, centerOfMass.z);
         _rigidbody.centerOfMass = centerOfMass;
