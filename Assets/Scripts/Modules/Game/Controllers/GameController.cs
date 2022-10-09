@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     {
         _data = new GameData();
         _spawnController.OnDestroyEnemy += UpdateCounter;
+        _view.OnQuit += Application.Quit;
     }
 
     private void Start()
@@ -65,5 +66,6 @@ public class GameController : MonoBehaviour
     private void OnDestroy()
     {
         _spawnController.OnDestroyEnemy -= UpdateCounter;
+        _view.OnQuit -= Application.Quit;
     }
 }

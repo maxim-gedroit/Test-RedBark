@@ -1,6 +1,6 @@
 public class GameData
 {
     public bool isLevelEnd;
-    public int EnemyCount = 20;
-    public float time = 12f;
+    public int EnemyCount = 200;
+    public float time = 120f;
 }

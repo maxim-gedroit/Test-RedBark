@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     
     [SerializeField] private float _viewClampYMin = -70f;
     [SerializeField] private float _viewClampYMax = 80f;
-    [SerializeField] private float _viewSensitivity = 400f;
+    [SerializeField] private float _viewSensitivity;
     
     private PlayerInput _playerInput;
     private CharacterController _characterController;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         _weapon.Fire();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         CalculateView();
     }

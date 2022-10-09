@@ -3224,7 +3224,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 2000, y: 1000}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -4030,7 +4030,7 @@ MonoBehaviour:
   _weapon: {fileID: 115115645}
   _viewClampYMin: -70
   _viewClampYMax: 80
-  _viewSensitivity: 400
+  _viewSensitivity: 20
 --- !u!143 &1834870303
 CharacterController:
   m_ObjectHideFlags: 0
